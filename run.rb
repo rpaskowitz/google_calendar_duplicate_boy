@@ -5,7 +5,7 @@ require 'date'
 require 'fileutils'
 
 OOB_URI = 'urn:ietf:wg:oauth:2.0:oob'.freeze
-APPLICATION_NAME = 'Google Calendar Iron Man'.freeze
+APPLICATION_NAME = 'Google Calendar Dupicate Boy'.freeze
 CLIENT_SECRETS_PATH = 'client_secret.json'.freeze
 CREDENTIALS_PATH = File.join(Dir.home, '.credentials', 'calendar-ruby-quickstart.yaml')
 # SCOPE = Google::Apis::CalendarV3::AUTH_CALENDAR_READONLY
@@ -80,12 +80,10 @@ $service.client_options.application_name = APPLICATION_NAME
 $service.authorization = authorize
 
 puts 'URL of base calendar'
-base_cal = gets.chomp
-base_cal = $service.list_events(base_cal.to_s, single_events: true, order_by: 'startTime', time_min: '1970-01-01T00:00:00Z')
+base_cal = $service.list_events(gets.chomp, single_events: true, order_by: 'startTime', time_min: '1970-01-01T00:00:00Z')
 
 puts 'Name of your new calendar'
-new_cal_name = gets
-new_cal = new_calendar(new_cal_name, 'Asia/Hong_Kong')
+new_cal = new_calendar(gets, base_cal.time_zone)
 
 puts 'Set your offsets in days (default: 0)'
 days_of_offsets = gets

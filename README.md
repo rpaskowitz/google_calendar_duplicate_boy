@@ -2,7 +2,7 @@
 
 ## Duplicate Google calendars with events
 
-If you ever want to duplicate all existing events from one Google calendar to a new one, this is it.
+If you ever want to duplicate all existing events (with offsets) from one Google calendar to a new one, this is it.
 
 ### Setup
 I assume you have Ruby installed
@@ -20,7 +20,7 @@ I assume you have Ruby installed
 
 ### Super Power: Duplicate my calendar, please.
 1. Run `ruby run.rb`
-2. Enter the `URL` of your base calendar
+2. Enter the `Calendar ID` of your base calendar (i.e. `xxxx.com_xxxx@group.calendar.google.com`); you can find this in Calendar settings/details
 3. Give `Name` of your new calendar
 4. Set `Offset` value for events between base and new calendar. The unit is in `days` and the default is `0`.
 
