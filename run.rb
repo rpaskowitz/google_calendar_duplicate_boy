@@ -80,7 +80,23 @@ $service.client_options.application_name = APPLICATION_NAME
 $service.authorization = authorize
 
 puts 'URL of base calendar'
-base_cal = $service.list_events(gets.chomp, single_events: true, order_by: 'startTime', time_min: '1970-01-01T00:00:00Z')
+base_cal_id = gets.chomp
+puts 'Events starting after YYYY-MM-DD (leave blank for no limit)'
+start_date = gets.chomp
+if start_date.length > 0
+  time_min = DateTime.strptime(start_date, '%Y-%m-%d').strftime("%FT00:00:00Z")
+else
+  time_min = '1970-01-01T00:00:00Z'
+end
+
+puts 'Events starting Before YYYY-MM-DD (leave blank for no limit)'
+end_date = gets.chomp
+if start_date.length > 0
+  time_max = DateTime.strptime(end_date, '%Y-%m-%d').strftime("%FT23:59:59Z")
+else
+  time_max = '2999-01-01T00:00:00Z'
+end
+base_cal = $service.list_events(base_cal_id, single_events: true, order_by: 'startTime', time_min: time_min, time_max: time_max)
 
 puts 'Name of your new calendar'
 new_cal = new_calendar(gets, base_cal.time_zone)
