@@ -79,14 +79,16 @@ $service = Google::Apis::CalendarV3::CalendarService.new
 $service.client_options.application_name = APPLICATION_NAME
 $service.authorization = authorize
 
-# puts 'duration: beginning'
-# puts 'duration: end'
-base_cal = $service.list_events('hackpacific.com_aghrrdjd5d8r3pfno7sachkde0@group.calendar.google.com', single_events: true, order_by: 'startTime', time_min: (DateTime.now - 10).iso8601)
+puts 'URL of base calendar'
+base_cal = gets.chomp
+base_cal = $service.list_events(base_cal.to_s, single_events: true, order_by: 'startTime', time_min: '1970-01-01T00:00:00Z')
 
 puts 'Name of your new calendar'
 new_cal_name = gets
 new_cal = new_calendar(new_cal_name, 'Asia/Hong_Kong')
 
-puts 'Set your offsets in days'
+puts 'Set your offsets in days (default: 0)'
 days_of_offsets = gets
-copy_events(base_cal, new_cal, days_of_offsets.to_i) # offset by 8 weeks
+copy_events(base_cal, new_cal, days_of_offsets.to_i)
+
+puts 'DONE!'
